@@ -1,0 +1,45 @@
+/* Navbar Links */
+.nav a.nav-link {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Hover Effect on Navbar Links */
+.nav a.nav-link:hover {
+    color: #e9c46a; /* Light Yellow Color */
+}
+
+/* Underline Hover Animation */
+.nav a.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: #e9c46a;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav a.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Dropdown Menu Customization */
+.dropdown-menu {
+    background-color: #2a9d8f;
+    color: #fff;
+}
+
+.dropdown-item {
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #e9c46a;
+    color: #333;
+}
