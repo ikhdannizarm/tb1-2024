@@ -70,7 +70,7 @@
     #heroCarousel {
         position: relative;
         z-index: 1;
-        margin-top: 0;
+        margin-top: -100px;
     }
 
     /* Efek Setengah Lingkaran */
@@ -156,7 +156,6 @@
     /* Style for Sections */
     .container section {
         position: relative; /* Agar section ini berada di atas efek setengah lingkaran */
-        margin-top: -100px; /* Mengurangi jarak margin untuk menaikkan section */
         z-index: 2; /* Menempatkan section di atas efek setengah lingkaran */
         background: #f0f2f5; /* Light background color for sections */
         padding: 30px;

@@ -194,9 +194,9 @@
     </header>
 
     <!-- Page Content -->
-    <main class="py-0" style="margin-top: -100px;">
+    <main class="py-0">
         @yield('content')
-    </main>    
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -206,7 +206,7 @@
                     <img src="{{ asset('images/logoNgulisik.png') }}" alt="Logo Ngulisik" class="footer-logo">
                 </div>
             </div>
-    
+
             <div class="row">
                 <!-- Kolom 1: Tentang Ngulisik -->
                 <div class="col-lg-3 col-md-6 footer-section">
@@ -219,7 +219,7 @@
                         <li><a href="#" target="_blank" rel="noopener noreferrer">Kebijakan Privasi</a></li>
                     </ul>
                 </div>
-    
+
                 <!-- Kolom 2: Layanan -->
                 <div class="col-lg-3 col-md-6 footer-section">
                     <h5>Layanan</h5>
@@ -230,7 +230,7 @@
                         <li><a href="#faq" target="_blank" rel="noopener noreferrer">FAQ</a></li>
                     </ul>
                 </div>
-    
+
                 <!-- Kolom 3: Link Penting -->
                 <div class="col-lg-3 col-md-6 footer-section">
                     <h5>Link Penting</h5>
@@ -241,7 +241,7 @@
                         <li><a href="https://www.instagram.com/ngulisik" target="_blank" rel="noopener noreferrer">Sosial Media</a></li>
                     </ul>
                 </div>
-    
+
                 <!-- Kolom 4: Kontak -->
                 <div class="col-lg-3 col-md-6 footer-section">
                     <h5>Kontak Kami</h5>
@@ -250,10 +250,10 @@
                     <p>Telp: +62 265 1234567</p>
                 </div>
             </div>
-    
+
             <!-- Garis Pemisah -->
             <hr class="footer-divider">
-    
+
             <!-- Copyright -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
@@ -262,8 +262,8 @@
             </div>
         </div>
     </footer>
-        
-    
+
+
 
     <!-- Bootstrap 5 JS and Popper -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
