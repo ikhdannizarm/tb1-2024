@@ -28,16 +28,16 @@ class LoginController extends Controller
     {
         // Validasi form login
         $request->validate([
-            'email_or_name' => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
         // Cek apakah input adalah email atau name
-        $loginField = filter_var($request->email_or_name, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $loginField = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
 
         // Tentukan kredensial berdasarkan input (email atau name)
         $credentials = [
-            $loginField => $request->email_or_name,
+            $loginField => $request->email,
             'password' => $request->password,
         ];
 
@@ -49,7 +49,7 @@ class LoginController extends Controller
 
         // Jika login gagal
         return back()->withErrors([
-            'email_or_name' => 'The provided credentials do not match our records.',
+            'email' => 'The provided credentials do not match our records.',
         ]);
     }
 
