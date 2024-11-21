@@ -1,4 +1,7 @@
 <x-guest-layout>
+    @section('title', 'Reset Password')
+
+    @section('content')
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
@@ -8,7 +11,8 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" :disabled="true" />
+            <input type="hidden" name="email" value="{{$request->email}}">
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -36,4 +40,5 @@
             </x-primary-button>
         </div>
     </form>
+    @endsection
 </x-guest-layout>
