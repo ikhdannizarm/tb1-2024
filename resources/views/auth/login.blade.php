@@ -7,9 +7,9 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <!-- Email or Name -->
+        <!-- Email -->
         <div class="mb-6">
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('Alamat Email')" />
             <x-text-input id="email" class="block mt-1 w-full py-3 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" type="text" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
