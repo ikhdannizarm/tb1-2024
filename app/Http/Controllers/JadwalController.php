@@ -14,4 +14,12 @@ class JadwalController extends Controller
 
         return view('jadwal', compact('jadwal', 'tanggal'));
     }
+
+    public function listDataJadwal(Request $request)
+    {
+        $tanggal = $request->input('date');
+        $jadwalList = Jadwal::whereDate('tanggal', $tanggal)->get();
+
+        return response()->json($jadwalList);
+    }
 }

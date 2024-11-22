@@ -9,6 +9,7 @@ use App\Models\Pemesanan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TiketController extends Controller
 {
@@ -16,7 +17,7 @@ class TiketController extends Controller
     {
         return view('home');
     }
-    
+
     // 1. Halaman memilih tanggal di kalender
     public function pilihTanggal()
     {
@@ -29,7 +30,7 @@ class TiketController extends Controller
         $request->validate([
             'tanggal' => 'required|date|after_or_equal:today'
         ]);
-        
+
         $tanggal = $request->input('tanggal');
         $jadwals = Jadwal::whereDate('Waktu_Pemberangkatan', $tanggal)->get();
 
@@ -54,23 +55,26 @@ class TiketController extends Controller
     }
 
     // 4. Menyimpan pemesanan kursi setelah user memilih kursi
-    public function pesanKursi(Request $request, $Id_Jadwal)
+    public function pesanKursi(Request $request)
     {
         $request->validate([
             'kursi' => 'required|array|min:1',
             'kursi.*' => 'exists:kursi,Id_Kursi',
+            'id_jadwal' => 'required'
         ]);
+
 
         try {
             DB::beginTransaction();
-            
+
             $kursiIds = $request->input('kursi');
+            $Id_Jadwal = $request->input('id_jadwal');
 
             // Verifikasi ketersediaan kursi yang dipilih
             $selectedKursi = Kursi::whereIn('Id_Kursi', $kursiIds)
-                                  ->where('Status_Pemesanan', '0')
-                                  ->lockForUpdate()
-                                  ->get();
+                ->where('Status_Pemesanan', '0')
+                ->lockForUpdate()
+                ->get();
 
             if (count($selectedKursi) != count($kursiIds)) {
                 throw new \Exception('Beberapa kursi yang dipilih telah dipesan. Silakan pilih kursi lain.');
@@ -93,10 +97,11 @@ class TiketController extends Controller
             }
 
             DB::commit();
+
             return redirect()->route('pesan.konfirmasi')->with('success', 'Pemesanan berhasil.');
-            
         } catch (\Exception $e) {
             DB::rollback();
+            Log::error('error : ' . $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -117,9 +122,9 @@ class TiketController extends Controller
     public function konfirmasi()
     {
         $pemesanan = Pemesanan::where('user_id', Auth::id())
-                                ->orderBy('Tanggal_Pemesanan', 'desc')
-                                ->with(['jadwal', 'kursi'])
-                                ->first();
+            ->orderBy('Tanggal_Pemesanan', 'desc')
+            ->with(['jadwal', 'kursi'])
+            ->first();
 
         if (!$pemesanan) {
             return redirect()->route('pesan.pesanan')->with('error', 'Tidak ada pemesanan yang ditemukan.');

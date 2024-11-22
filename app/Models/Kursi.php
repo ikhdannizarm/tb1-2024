@@ -10,6 +10,8 @@ class Kursi extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'kursi';
     protected $primaryKey = 'Id_Kursi';
     protected $fillable = ['Id_Jadwal', 'Nomor_Kursi', 'Status_Pemesanan'];
