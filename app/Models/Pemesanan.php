@@ -28,6 +28,6 @@ class Pemesanan extends Model
 
     public function kursi()
     {
-        return $this->belongsTo(Kursi::class, 'Id_Kursi');
+        return $this->hasMany(Kursi::class, 'Id_Kursi');
     }
 }

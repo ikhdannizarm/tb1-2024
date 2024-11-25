@@ -3,7 +3,6 @@
 @section('style')
     <style>
         /* Styling khusus hanya untuk halaman pilihTanggal */
-
         .containerComponent {
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             padding: 80px 0;
@@ -263,7 +262,25 @@
 
 @section('script')
     <script>
+        // this function works to disabled past date
+        $(function() {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+
+            $('#tanggal').attr('min', maxDate);
+        });
+
         $(document).ready(function() {
+            // this trigger on change is works to get jadwal based on the date
             $('#tanggal').on('change', function() {
                 $("#pilihKursi").addClass('hidden');
                 $("#foundKursi").addClass('hidden');
@@ -325,6 +342,7 @@
             })
         })
 
+        // this function works to search chair by id jadwal
         function searchChair(idJadwal) {
             $('.cardJadwal').removeClass('active');
             $(`#jadwal_${idJadwal}`).addClass('active');
