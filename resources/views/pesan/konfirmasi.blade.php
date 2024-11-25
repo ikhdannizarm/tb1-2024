@@ -1,67 +1,81 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <h2 class="title">Konfirmasi Pemesanan</h2>
+@section('style')
+    <style>
+        .title {
+            text-align: center;
+            font-size: 24px;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    @if($pemesanan)
-        <div class="confirmation-message">
-            <p>Terima kasih! Pemesanan Anda telah berhasil.</p>
-            <ul class="order-details">
-                <li><strong>ID Pemesanan:</strong> {{ $pemesanan->Id_Pemesanan }}</li>
-                <li><strong>Jadwal:</strong> {{ $pemesanan->jadwal->Waktu_Pemberangkatan }}</li>
-                <li><strong>Nomor Kursi:</strong> {{ $pemesanan->kursi->Nomor_Kursi }}</li>
-                <li><strong>Tanggal Pemesanan:</strong> {{ $pemesanan->Tanggal_Pemesanan }}</li>
-                <li><strong>Total Harga:</strong> Rp {{ number_format($pemesanan->Total_Harga, 0, ',', '.') }}</li>
-            </ul>
-        </div>
-    @else
-        <p class="error-message">Tidak ada pemesanan yang ditemukan.</p>
-    @endif
-</div>
+        .confirmation-message {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-{{-- Inline CSS for styling --}}
-@section('styles')
-<style>
-    .container {
-        margin-top: 30px;
-    }
+        .order-details {
+            list-style-type: none;
+            padding: 0;
+        }
 
-    .title {
-        text-align: center;
-        font-size: 24px;
-        color: #4CAF50;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+        .order-details li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
 
-    .confirmation-message {
-        background-color: #f4f4f9;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        .order-details li strong {
+            color: #333;
+        }
 
-    .order-details {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .order-details li {
-        margin-bottom: 10px;
-        font-size: 18px;
-    }
-
-    .order-details li strong {
-        color: #333;
-    }
-
-    .error-message {
-        color: red;
-        font-size: 18px;
-        text-align: center;
-    }
-</style>
+        .error-message {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
 @endsection
 
+@section('content')
+    <div class="container my-10 max-w-[700px]">
+        <div class="confirmation-message">
+            <h1 class="font-bold text-2xl mb-2">Invoice Pemesanan</h1>
+            <hr class="mb-3 border-[#7f8c8d]">
+            @if ($pemesanan)
+                <div class="flex justify-between mx-2 mb-3">
+                    <div class="flex flex-col gap-2">
+                        <p class="font-semibold text-secondary">ID Pemesanan</p>
+                        <p>{{ $pemesanan->Id_Pemesanan }}</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <p class="font-semibold text-secondary">Tanggal Pemesanan</p>
+                        <p>{{ $pemesanan->Tanggal_Pemesanan }}</p>
+                    </div>
+                </div>
+                <div class="flex justify-between mx-2 mb-3">
+                    <div class="flex flex-col gap-2">
+                        <p class="font-semibold text-secondary">Nomor Kursi</p>
+                        <p>{{ $pemesanan->kursi->Nomor_Kursi }}</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <p class="font-semibold text-secondary">Waktu Berangkat</p>
+                        <p>{{ $pemesanan->jadwal->Waktu_Pemberangkatan }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="flex justify-between mx-2 mt-3 mb-10">
+                    <div class="flex flex-col gap-2">
+                        <p class="font-semibold text-secondary">Total Harga</p>
+                        <p class="font-bold">Rp {{ number_format($pemesanan->Total_Harga, 0, ',', '.') }}</p>
+                    </div>
+                </div>
+                <a class="btn btn-primary" href="{{ route('home') }}">Ke Halaman Beranda</a>
+            @else
+                <p class="error-message">Tidak ada pemesanan yang ditemukan.</p>
+            @endif
+        </div>
+    </div>
 @endsection
