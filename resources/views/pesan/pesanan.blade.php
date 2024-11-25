@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('style')
     <style>
         .container.pesanan-saya {
             padding: 40px;
@@ -55,7 +55,9 @@
             font-size: 1.2em;
         }
     </style>
+@endsection
 
+@section('content')
     <div class="container pesanan-saya">
         <h1>Pesanan Saya</h1>
 
@@ -68,7 +70,7 @@
                         {{ $order->jadwal->Waktu_Tiba }}<br>
                         <span class="label">Kursi:</span>
 
-                        @foreach ($order->kursi as $kursi)
+                        @foreach ($order->kursis as $kursi)
                             {{ $kursi->Nomor_Kursi }}
                             @if (!$loop->last)
                                 ,
