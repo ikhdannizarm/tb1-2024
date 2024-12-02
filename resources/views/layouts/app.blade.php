@@ -170,7 +170,6 @@
 </head>
 
 <body>
-
     <!-- Header with Logo, Centered Navbar, and User Dropdown -->
     <header class="sticky-header">
         <div class="container d-flex justify-content-between align-items-center">
